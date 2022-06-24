@@ -6,7 +6,7 @@ import { Comment } from './Comment';
 const resolvers = {
   Query: {
     ...User.resolvers.queries,
-    ...Post.resolvers.queries,
+    // ...Post.resolvers.queries,
     ...Category.resolvers.queries,
   },
   Mutation: {

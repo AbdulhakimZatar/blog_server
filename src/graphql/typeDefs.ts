@@ -11,16 +11,16 @@ const typeDefs = gql`
   ${Comment.types}
 
   type Query {
+    ${Category.queries}
     ${User.queries}
     ${Post.queries}
-    ${Category.queries}
   }
   
   type Mutation {
-    ${User.mutations}
-    ${Post.mutations}
     ${Category.mutations}
     ${Comment.mutations}
+    ${Post.mutations}
+    ${User.mutations}
   }
 `;
 

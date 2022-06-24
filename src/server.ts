@@ -1,7 +1,7 @@
 import { ApolloServer } from "apollo-server";
 import { typeDefs, resolvers } from "./graphql";
 import { pg } from "./data";
-console.log(typeDefs, resolvers);
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
