@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS posts (
   body TEXT,
   user_id INTEGER REFERENCES users(id),
   category_id INTEGER REFERENCES categories(id),
-  created_at TIMESTAMP,
+  created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP
 );
 

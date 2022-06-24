@@ -1,28 +1,25 @@
+import {pg} from '../../data';
+import bcrypt from 'bcrypt';
+
 const queries = {
-  user: (root, args) => {
-    return {
-      id: "12345",
-      email: "some.user@email.com",
-      password: "Pa$$w0rd!",
-      loggedIn: false,
-      firstName: "Some",
-      lastName: "User",
-    };
+  getUser: (root, args) => {
+    const {id} = args;
+    const SQL = `SELECT * FROM users WHERE id = $1`;
+    const values = [id];
+    return pg.query(SQL, values).then(result => result.rows[0]);
   },
+  getUsers: () => {
+    const SQL = `SELECT * FROM users`;
+    return pg.query(SQL).then(result => result.rows);
+  }
 };
 
 const mutations = {
-  createUser: (root, args) => {
-    const newUser = {
-      id: "54321",
-      email: args.email,
-      password: args.password,
-      loggedIn: false,
-      firstName: args.firstName,
-      lastName: args.lastName,
-    };
-
-    return newUser;
+  createUser: async (root, args) => {
+   const {username, password} = args;
+   const SQL = `INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id, username`;
+    const values = [username, await bcrypt.hashSync(password, 10)];
+    return pg.query(SQL, values).then(result => result.rows[0]);
   },
 };
 

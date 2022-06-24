@@ -1,15 +1,10 @@
 import { ApolloServer } from "apollo-server";
 import { typeDefs, resolvers } from "./graphql";
-import { Client } from "pg";
-
+import { pg } from "./data";
+console.log(typeDefs, resolvers);
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-});
-
-const pg = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
 });
 
 pg.connect().then(() => {
