@@ -1,3 +1,3 @@
 export const queries = `
-getCategories : [Category!]
+categories : [Category!]
 `;

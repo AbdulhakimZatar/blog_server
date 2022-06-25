@@ -2,14 +2,14 @@ import { pg } from "../../data";
 import bcrypt from "bcrypt";
 
 const queries = {
-  getUser: (root, args) => {
+  user: async (root, args) => {
     const { id } = args;
-    const SQL = `SELECT * FROM users WHERE id = $1`;
+    const SQL = `SELECT users.*,COALESCE(json_agg(posts.*) FILTER (WHERE posts.id IS NOT NULL), '[]') as posts FROM users FULL JOIN posts ON posts.user_id = users.id WHERE users.id = $1 GROUP BY users.id;`;
     const values = [id];
     return pg.query(SQL, values).then((result) => result.rows[0]);
   },
-  getUsers: () => {
-    const SQL = `SELECT * FROM users`;
+  users: async () => {
+    const SQL = `SELECT users.*,COALESCE(json_agg(posts.*) FILTER (WHERE posts.id IS NOT NULL), '[]') as posts FROM users FULL JOIN posts ON posts.user_id = users.id GROUP BY users.id;`;
     return pg.query(SQL).then((result) => result.rows);
   },
 };

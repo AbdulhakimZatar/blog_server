@@ -1,4 +1,4 @@
 export const queries = `
-getPost(id: String!) : Post
-getPosts : [Post!]
+post(id: String!) : Post
+posts : [Post!]
 `;

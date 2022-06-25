@@ -1,7 +1,7 @@
 import { pg } from "../../data";
 
 const queries = {
-  getCategories: () => {
+  categories: () => {
     const SQL = `SELECT * FROM categories`;
     return pg.query(SQL).then((result) => result.rows);
   },

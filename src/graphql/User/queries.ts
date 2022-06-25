@@ -1,4 +1,4 @@
 export const queries = `
-getUser(id: String!) : User
-getUsers : [User!]
+user(id: String!) : User
+users : [User!]
 `;

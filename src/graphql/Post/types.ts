@@ -3,9 +3,8 @@ export const types = `
     id: ID!
     title: String!
     body: String
-    user: User!
+    user: User
     category: Category
-    comments: [Comment!]
     created_at: String
     updated_at: String
   }
